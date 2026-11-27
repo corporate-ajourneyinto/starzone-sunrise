@@ -13,7 +13,7 @@ Voraussetzung: Aktives **Apple Developer Program** ([developer.apple.com](https:
 2. **Bundle-ID registrieren:**
    - Öffne [developer.apple.com/account/resources/identifiers/list](https://developer.apple.com/account/resources/identifiers/list)
    - Klicke **+** → **App IDs** → **App**
-   - **Bundle ID (Explicit):** z. B. `ch.starzone.festivalapp` *(falls bereits vergeben, wähle eine eigene eindeutige ID wie `ch.deinname.starzone`)*.
+   - **Bundle ID (Explicit):** `sunrisestarzoneappv1` *(muss exakt mit App Store Connect übereinstimmen)*.
 3. **Neue App anlegen:**
    - Öffne [appstoreconnect.apple.com](https://appstoreconnect.apple.com) → **Meine Apps → + → Neue App**
    - Plattform: **iOS**, Sprache: **Deutsch**, Bundle-ID aus Schritt 1.2 wählen.
@@ -38,7 +38,7 @@ Lege diese **4 Secrets** an:
 | `APP_STORE_CONNECT_KEY_ID` | **Key ID** (10-stellig) des API-Keys |
 | `APP_STORE_CONNECT_API_KEY` | Kompletter Inhalt der `AuthKey_XXXX.p8`-Datei *(Klartext inkl. `-----BEGIN PRIVATE KEY-----` oder Base64)* |
 
-*(Optional: Falls deine Bundle-ID von `ch.starzone.festivalapp` abweicht, lege unter **Variables** eine Variable `APP_BUNDLE_ID` mit deiner Bundle-ID an.)*
+*(Optional: Falls deine Bundle-ID von `sunrisestarzoneappv1` abweicht, lege unter **Variables** eine Variable `APP_BUNDLE_ID` mit deiner Bundle-ID an.)*
 
 ---
 

@@ -54,7 +54,7 @@ jobs:
           INPUT_VERSION: ${{ github.event.inputs.marketing_version }}
           INPUT_BUILD: ${{ github.event.inputs.build_number }}
         run: |
-          BUNDLE_ID="${INPUT_BUNDLE_ID:-${VAR_BUNDLE_ID:-ch.starzone.festivalapp}}"
+          BUNDLE_ID="${INPUT_BUNDLE_ID:-${VAR_BUNDLE_ID:-sunrisestarzoneappv1}}"
           MARKETING_VERSION="${INPUT_VERSION:-1.0.0}"
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             MARKETING_VERSION="${GITHUB_REF#refs/tags/v}"

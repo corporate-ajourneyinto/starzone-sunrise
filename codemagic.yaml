@@ -12,11 +12,11 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: ch.starzone.festivalapp
+        bundle_identifier: sunrisestarzoneappv1
       vars:
         XCODE_PROJECT: "starzone.xcodeproj"
         XCODE_SCHEME: "starzone"
-        BUNDLE_ID: "ch.starzone.festivalapp"
+        BUNDLE_ID: "sunrisestarzoneappv1"
         # Trage hier deine numerische Apple App-ID aus App Store Connect ein
         # (App Store Connect -> Meine Apps -> App-Informationen -> Apple-ID):
         APP_STORE_APPLE_ID: 1234567890
