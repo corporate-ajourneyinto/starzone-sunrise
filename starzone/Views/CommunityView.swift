@@ -105,7 +105,12 @@ struct CommunityView: View {
             }
             .sunriseCard()
 
-            ForEach(store.state.vibePosts) { post in
+            let visiblePosts = store.state.vibePosts.filter { post in
+                !store.state.reportedPostIds.contains(post.id) &&
+                !store.state.blockedAuthors.contains(post.author)
+            }
+
+            ForEach(visiblePosts) { post in
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         VStack(alignment: .leading, spacing: 1) {
@@ -119,6 +124,27 @@ struct CommunityView: View {
                         Text(post.timestamp)
                             .font(.caption2)
                             .foregroundStyle(SunriseTheme.subtle)
+
+                        if post.author != "Du (starzone Member)" {
+                            Menu {
+                                Button(role: .destructive) {
+                                    store.reportPost(id: post.id)
+                                } label: {
+                                    Label("Beitrag melden", systemImage: "flag")
+                                }
+                                Button(role: .destructive) {
+                                    store.blockAuthor(post.author)
+                                } label: {
+                                    Label("\(post.author) blockieren", systemImage: "hand.raised")
+                                }
+                            } label: {
+                                Image(systemName: "ellipsis")
+                                    .font(.caption.weight(.bold))
+                                    .foregroundStyle(SunriseTheme.subtle)
+                                    .padding(6)
+                            }
+                            .accessibilityLabel("Beitrags-Optionen")
+                        }
                     }
 
                     if let img = post.assetImageName {
@@ -150,6 +176,12 @@ struct CommunityView: View {
                 }
                 .sunriseCard()
             }
+
+            Text("Community-Richtlinien: Respektvoller Umgang ist Pflicht. Unangemessene Beiträge können jederzeit über das Menü (•••) gemeldet oder Nutzer blockiert werden.")
+                .font(.caption2)
+                .foregroundStyle(SunriseTheme.subtle)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 8)
         }
     }
 
@@ -280,7 +312,12 @@ struct CommunityView: View {
                     Spacer()
                 }
 
-                ForEach(activeChannel.messages) { msg in
+                let visibleMessages = activeChannel.messages.filter { msg in
+                    !store.state.reportedPostIds.contains(msg.id) &&
+                    !store.state.blockedAuthors.contains(msg.author)
+                }
+
+                ForEach(visibleMessages) { msg in
                     VStack(alignment: .leading, spacing: 2) {
                         HStack {
                             Text(msg.author)
@@ -290,6 +327,26 @@ struct CommunityView: View {
                             Text(msg.time)
                                 .font(.caption2)
                                 .foregroundStyle(SunriseTheme.subtle)
+
+                            if msg.author != "Du" {
+                                Menu {
+                                    Button(role: .destructive) {
+                                        store.reportPost(id: msg.id)
+                                    } label: {
+                                        Label("Nachricht melden", systemImage: "flag")
+                                    }
+                                    Button(role: .destructive) {
+                                        store.blockAuthor(msg.author)
+                                    } label: {
+                                        Label("\(msg.author) blockieren", systemImage: "hand.raised")
+                                    }
+                                } label: {
+                                    Image(systemName: "ellipsis")
+                                        .font(.caption2.weight(.bold))
+                                        .foregroundStyle(SunriseTheme.subtle)
+                                        .padding(4)
+                                }
+                            }
                         }
                         Text(msg.text)
                             .font(.subheadline)

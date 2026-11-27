@@ -1,0 +1,31 @@
+name: iOS Build Check (Xcode)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: SwiftUI iOS Build (Simulator)
+    runs-on: macos-15
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Xcode-Version anzeigen
+        run: xcodebuild -version
+
+      - name: iOS-App für Simulator kompilieren
+        run: |
+          xcodebuild \
+            -project starzone.xcodeproj \
+            -scheme starzone \
+            -sdk iphonesimulator \
+            -destination "generic/platform=iOS Simulator" \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build

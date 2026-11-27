@@ -66,7 +66,7 @@ struct VotingWalletView: View {
             }
 
             HStack(spacing: 8) {
-                Button("+ CHF 25 laden") {
+                Button("+ CHF 25 (Demo)") {
                     store.topUpCashless(amount: 25)
                 }
                 .font(.caption.weight(.bold))
@@ -76,7 +76,7 @@ struct VotingWalletView: View {
                 .background(SunriseTheme.red)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
 
-                Button("+ CHF 50 laden") {
+                Button("+ CHF 50 (Demo)") {
                     store.topUpCashless(amount: 50)
                 }
                 .font(.caption.weight(.bold))
@@ -87,6 +87,10 @@ struct VotingWalletView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(SunriseTheme.borderStrong))
             }
+
+            Text("Hinweis: Aufladung dient der Festival-Cashless-Vorschau vor Ort (kein kostenpflichtiger In-App-Kauf).")
+                .font(.caption2)
+                .foregroundStyle(SunriseTheme.subtle)
         }
         .sunriseTierCard()
     }
@@ -274,6 +278,11 @@ struct VotingWalletView: View {
                     .background(SunriseTheme.background)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
+
+                Text("Teilnahmebedingungen: Kostenlose Teilnahme ab 18 Jahren. Apple Inc. ist weder Sponsor dieser Gewinnspiele noch in irgendeiner Weise daran beteiligt.")
+                    .font(.caption2)
+                    .foregroundStyle(SunriseTheme.subtle)
+                    .padding(.top, 4)
             }
             .sunriseCard()
         }

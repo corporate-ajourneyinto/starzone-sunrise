@@ -308,6 +308,21 @@ final class FestivalStore {
         pushToast(category: .quest, title: "Vibe-Check geteilt", message: "Dein Beitrag ist jetzt auf der Social Wall (+35 XP).")
     }
 
+    func reportPost(id: String) {
+        if !state.reportedPostIds.contains(id) {
+            state.reportedPostIds.append(id)
+        }
+        pushToast(category: .konflikt, title: "Beitrag gemeldet", message: "Der Inhalt wurde ausgeblendet und zur Moderation vorgemerkt.")
+    }
+
+    func blockAuthor(_ author: String) {
+        guard author != "Du", author != "Du (starzone Member)" else { return }
+        if !state.blockedAuthors.contains(author) {
+            state.blockedAuthors.append(author)
+        }
+        pushToast(category: .konflikt, title: "Nutzer blockiert", message: "Beiträge von \(author) werden dir nicht mehr angezeigt.")
+    }
+
     func sendChatMessage(channelId: String, text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty,

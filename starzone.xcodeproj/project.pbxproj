@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6182A98475AC52F36CA2BB44 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E330E81EFE4325D2BE9A2D2E /* PrivacyInfo.xcprivacy */; };
 		79D4FA0E8511866808DEC3B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 617AF452B7044BD82346A29B /* Assets.xcassets */; };
 		75B58B8611CC9194FCF295F8 /* StarzoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BD93CE61814B1B61823EC /* StarzoneApp.swift */; };
 		DD8E1E9A903B8C2DDCE463D6 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C550AE97FA8E73D12051A545 /* MainTabView.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E330E81EFE4325D2BE9A2D2E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8D747E305A0F63022E116527 /* starzone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = starzone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617AF452B7044BD82346A29B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A4C68C7DA7006139C672553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				9F0F019E93DB26A2C6571D44 /* Views */,
 				617AF452B7044BD82346A29B /* Assets.xcassets */,
 				4A4C68C7DA7006139C672553 /* Info.plist */,
+				E330E81EFE4325D2BE9A2D2E /* PrivacyInfo.xcprivacy */,
 			);
 			path = starzone;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D4FA0E8511866808DEC3B4 /* Assets.xcassets in Resources */,
+				6182A98475AC52F36CA2BB44 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

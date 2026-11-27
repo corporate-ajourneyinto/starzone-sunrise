@@ -1,0 +1,52 @@
+workflows:
+  ios-appstore-release:
+    name: starzone iOS — Build & App Store Connect (TestFlight)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    # 1) In Codemagic unter "Teams -> Integrations -> App Store Connect"
+    #    eine Integration mit exakt diesem Namen ("starzone_asc") anlegen:
+    integrations:
+      app_store_connect: starzone_asc
+
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: ch.starzone.festivalapp
+      vars:
+        XCODE_PROJECT: "starzone.xcodeproj"
+        XCODE_SCHEME: "starzone"
+        BUNDLE_ID: "ch.starzone.festivalapp"
+        # Trage hier deine numerische Apple App-ID aus App Store Connect ein
+        # (App Store Connect -> Meine Apps -> App-Informationen -> Apple-ID):
+        APP_STORE_APPLE_ID: 1234567890
+      xcode: latest
+
+    scripts:
+      - name: Provisioning Profiles & Signing anwenden
+        script: |
+          xcode-project use-profiles
+
+      - name: Build-Nummer automatisch erhöhen
+        script: |
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID" || echo 0)
+          if [ -z "$LATEST_BUILD_NUMBER" ]; then LATEST_BUILD_NUMBER=0; fi
+          NEXT_BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+          echo "Setze Build-Nummer auf $NEXT_BUILD_NUMBER"
+          agvtool new-version -all "$NEXT_BUILD_NUMBER"
+
+      - name: IPA bauen und signieren
+        script: |
+          xcode-project build-ipa \
+            --project "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false

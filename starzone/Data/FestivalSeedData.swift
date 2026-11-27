@@ -250,7 +250,9 @@ enum FestivalSeedData {
                 genres: ["Indie-Rock", "Electronic"],
                 regions: ["Zürich", "St. Gallen"],
                 eventTypes: ["Festival", "Hallenkonzert"]
-            )
+            ),
+            reportedPostIds: [],
+            blockedAuthors: []
         )
     }
 }

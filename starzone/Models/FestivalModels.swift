@@ -434,4 +434,6 @@ struct PersistedFestivalState: Codable {
     var newsItems: [NewsItem]
     var raffles: [RaffleItem]
     var ticketPrefs: TicketAlertPrefs
+    var reportedPostIds: [String]
+    var blockedAuthors: [String]
 }
