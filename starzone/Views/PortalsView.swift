@@ -32,6 +32,41 @@ struct PortalsView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                StarzoneBrandHeader {
+                    StarzoneHeaderIconButton(
+                        systemImage: "arrow.clockwise",
+                        accessibilityLabel: "Seite neu laden"
+                    ) {
+                        reloadToken += 1
+                    }
+
+                    StarzoneHeaderIconButton(
+                        systemImage: "safari",
+                        accessibilityLabel: "In Safari öffnen"
+                    ) {
+                        showSafariSheet = true
+                    }
+
+                    Menu {
+                        Button("Demo-Daten zurücksetzen", role: .destructive) {
+                            store.resetDemoData()
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(SunriseTheme.ink)
+                            .frame(width: 36, height: 36)
+                            .background(SunriseTheme.surface)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(SunriseTheme.border, lineWidth: 1)
+                            )
+                            .shadow(color: SunriseTheme.ink.opacity(0.06), radius: 4, x: 0, y: 2)
+                    }
+                    .accessibilityLabel("Weitere Optionen")
+                }
+
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(PortalDestination.allCases) { portal in
@@ -59,31 +94,7 @@ struct PortalsView: View {
                 EmbeddedWebView(url: selectedPortal.url, reloadToken: reloadToken)
                     .ignoresSafeArea(edges: .bottom)
             }
-            .navigationTitle("starzone & Sunrise")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
-                        reloadToken += 1
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-
-                    Button {
-                        showSafariSheet = true
-                    } label: {
-                        Image(systemName: "safari")
-                    }
-
-                    Menu {
-                        Button("Demo-Daten zurücksetzen", role: .destructive) {
-                            store.resetDemoData()
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
-                    }
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
             .sheet(isPresented: $showSafariSheet) {
                 SafariSheetView(url: selectedPortal.url)
                     .ignoresSafeArea()

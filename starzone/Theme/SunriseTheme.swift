@@ -97,3 +97,77 @@ struct SunrisePillBadge: View {
             .clipShape(Capsule())
     }
 }
+
+struct StarzoneBrandHeader<Trailing: View>: View {
+    var sectionTitle: String? = nil
+    @ViewBuilder var trailing: () -> Trailing
+
+    init(sectionTitle: String? = nil, @ViewBuilder trailing: @escaping () -> Trailing) {
+        self.sectionTitle = sectionTitle
+        self.trailing = trailing
+    }
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 12) {
+            Image("starzone_header_logo")
+                .resizable()
+                .interpolation(.high)
+                .scaledToFit()
+                .frame(height: 46, alignment: .leading)
+                .accessibilityLabel("starzone presented by Sunrise")
+
+            Spacer(minLength: 8)
+
+            HStack(spacing: 8) {
+                if let sectionTitle {
+                    Text(sectionTitle)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(SunriseTheme.muted)
+                        .lineLimit(1)
+                }
+                trailing()
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity)
+        .background(SunriseTheme.background.ignoresSafeArea(edges: .top))
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(SunriseTheme.border)
+                .frame(height: 1)
+        }
+    }
+}
+
+extension StarzoneBrandHeader where Trailing == EmptyView {
+    init(sectionTitle: String? = nil) {
+        self.sectionTitle = sectionTitle
+        self.trailing = { EmptyView() }
+    }
+}
+
+struct StarzoneHeaderIconButton: View {
+    let systemImage: String
+    var tint: Color = SunriseTheme.ink
+    let accessibilityLabel: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(tint)
+                .frame(width: 36, height: 36)
+                .background(SunriseTheme.surface)
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .stroke(SunriseTheme.border, lineWidth: 1)
+                )
+                .shadow(color: SunriseTheme.ink.opacity(0.06), radius: 4, x: 0, y: 2)
+        }
+        .accessibilityLabel(accessibilityLabel)
+    }
+}

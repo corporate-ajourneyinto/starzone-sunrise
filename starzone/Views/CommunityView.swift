@@ -37,16 +37,16 @@ struct CommunityView: View {
                 .padding(.vertical, 12)
             }
             .background(SunriseTheme.background)
-            .navigationTitle("Community")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                StarzoneBrandHeader(sectionTitle: "Community") {
+                    StarzoneHeaderIconButton(
+                        systemImage: "qrcode",
+                        tint: SunriseTheme.ink,
+                        accessibilityLabel: "Mein Buddy-QR"
+                    ) {
                         showBuddyQR = true
-                    } label: {
-                        Image(systemName: "qrcode")
                     }
-                    .accessibilityLabel("Mein Buddy-QR")
                 }
             }
             .sheet(isPresented: $showBuddyQR) {

@@ -32,8 +32,10 @@ struct VotingWalletView: View {
                 .padding(.vertical, 12)
             }
             .background(SunriseTheme.background)
-            .navigationTitle("Lounge & Wallet")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                StarzoneBrandHeader(sectionTitle: "Lounge & Wallet")
+            }
             .sheet(item: $expandedWalletItem) { item in
                 walletDetailSheet(item: item)
                     .presentationDetents([.medium, .large])

@@ -49,22 +49,16 @@ struct MapLineupView: View {
                 .padding(.vertical, 12)
             }
             .background(SunriseTheme.background)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image("starzone_header_logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 30)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                StarzoneBrandHeader {
+                    StarzoneHeaderIconButton(
+                        systemImage: store.state.weatherAlertActive ? "cloud.bolt.rain.fill" : "cloud.sun.fill",
+                        tint: store.state.weatherAlertActive ? SunriseTheme.orange : SunriseTheme.ink,
+                        accessibilityLabel: "Wetter-Alert umschalten"
+                    ) {
                         store.triggerWeatherAlert()
-                    } label: {
-                        Image(systemName: store.state.weatherAlertActive ? "cloud.bolt.rain.fill" : "cloud.sun.fill")
-                            .foregroundStyle(store.state.weatherAlertActive ? SunriseTheme.orange : SunriseTheme.ink)
                     }
-                    .accessibilityLabel("Wetter-Alert umschalten")
                 }
             }
             .sheet(item: $selectedPOI) { poi in

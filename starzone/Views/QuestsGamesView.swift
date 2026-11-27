@@ -29,8 +29,10 @@ struct QuestsGamesView: View {
                 .padding(.vertical, 12)
             }
             .background(SunriseTheme.background)
-            .navigationTitle("Quests & Spiele")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                StarzoneBrandHeader(sectionTitle: "Quests & Spiele")
+            }
         }
     }
 

@@ -23,8 +23,10 @@ struct LiveCamBackstageView: View {
                 .padding(.vertical, 12)
             }
             .background(SunriseTheme.background)
-            .navigationTitle("Live-Kamera & Show")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                StarzoneBrandHeader(sectionTitle: "Live-Cam & Show")
+            }
             .fullScreenCover(isPresented: $showLightstickFullscreen) {
                 LightstickFullscreenView(baseColor: $lightstickColor)
             }
