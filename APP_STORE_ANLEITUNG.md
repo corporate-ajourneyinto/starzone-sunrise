@@ -49,7 +49,7 @@ Lege diese **4 Secrets** an:
 3. Klicke auf **Run workflow** → optional Bundle-ID / Version prüfen → **Run workflow** starten.
    *(Alternativ startet der Upload automatisch, sobald du ein Git-Tag wie `v1.0.0` pushst.)*
 
-GitHub Actions baut die App auf einem `macos-15`-Runner mit Xcode, signiert sie über **Apple Cloud Signing** und lädt sie direkt in **App Store Connect → TestFlight** hoch!
+GitHub Actions baut die App auf einem macOS-Runner (`macos-26-intel`, im Dropdown auch auf `macos-15-intel` oder `macos-latest` umstellbar) mit Xcode, signiert sie über **Apple Cloud Signing** und lädt sie direkt in **App Store Connect → TestFlight** hoch!
 
 ---
 
